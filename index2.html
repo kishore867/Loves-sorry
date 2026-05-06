@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unlock My Love 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@700&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* 💖 PAGE TRANSITION */
+body{
+opacity:0;
+transform:scale(1.03);
+filter:blur(6px);
+transition:all 0.6s ease;
+}
+
+body.loaded{
+opacity:1;
+transform:scale(1);
+filter:blur(0);
+}
+
+body.fade-out{
+opacity:0;
+transform:scale(0.96);
+filter:blur(8px);
+}
+
+body.loaded{
+opacity:1;
+}
+
+body.fade-out{
+opacity:0;
+}
+
+/* ===== BASE ===== */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+height:100vh;
+overflow:hidden;
+display:flex;
+justify-content:center;
+align-items:center;
+font-family:'Poppins',sans-serif;
+background:linear-gradient(135deg,#0d0618,#1b1030,#ff73ae);
+position:relative;
+}
+
+/* glow */
+.blur1,.blur2{
+position:absolute;
+border-radius:50%;
+filter:blur(60px); /* 🔧 reduce lag */
+opacity:0.30;
+}
+
+.blur1{
+width:200px; /* 🔧 reduce */
+height:200px;
+background:#ff4fa3;
+top:-70px;
+left:-70px;
+}
+
+.blur2{
+width:200px;
+height:200px;
+background:#8f6bff;
+bottom:-70px;
+right:-70px;
+}
+
+/* card */
+.card{
+width:340px;
+padding:35px 26px;
+border-radius:32px;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(10px); /* 🔧 reduce heavy blur */
+border:1px solid rgba(255,255,255,0.12);
+text-align:center;
+position:relative;
+}
+
+/* title */
+.title{
+font-family:'Great Vibes',cursive;
+font-size:54px;
+color:white;
+margin-bottom:10px;
+text-shadow:0 0 25px #ff4fa3;
+}
+
+/* love text */
+.love-text{
+font-family:'Dancing Script',cursive;
+font-size:28px;
+color:#ffe4f1;
+margin-bottom:25px;
+line-height:1.4;
+}
+
+/* unlock */
+.unlock{
+width:135px;
+height:135px;
+margin:auto;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(145deg,#ff66b3,#ff9fcb);
+cursor:pointer;
+animation:heartbeat 1.8s infinite;
+}
+
+.unlock span{
+font-size:62px;
+}
+
+@keyframes heartbeat{
+0%{transform:scale(1);}
+14%{transform:scale(1.05);} /* 🔧 smoother */
+28%{transform:scale(1);}
+}
+
+/* pass section */
+.pass-section{
+display:none;
+margin-top:30px;
+animation:fade 0.4s ease;
+}
+
+/* input */
+input{
+width:100%;
+padding:16px;
+border:none;
+outline:none;
+border-radius:18px;
+background:rgba(255,255,255,0.13);
+color:white;
+text-align:center;
+font-size:15px;
+}
+
+input::placeholder{
+font-family:'Dancing Script',cursive;
+font-size:22px;
+color:#ffe3ef;
+}
+
+/* button */
+button{
+width:100%;
+margin-top:15px;
+padding:15px;
+border:none;
+border-radius:18px;
+background:linear-gradient(135deg,#ff5ea8,#ff9fc7);
+font-family:'Great Vibes',cursive;
+font-size:28px;
+color:white;
+cursor:pointer;
+}
+
+button:active{
+transform:scale(0.97);
+}
+
+/* shake */
+.shake{
+animation:shake 0.4s;
+}
+
+@keyframes shake{
+0%{transform:translateX(0);}
+25%{transform:translateX(-5px);}
+50%{transform:translateX(5px);}
+75%{transform:translateX(-5px);}
+100%{transform:translateX(0);}
+}
+
+</style>
+</head>
+
+<body>
+
+<audio id="bgMusic" loop>
+<source src="music.mp3" type="audio/mp3">
+</audio>
+
+<div class="blur1"></div>
+<div class="blur2"></div>
+
+<div class="card">
+
+<div class="title">Unlock My Love 💕</div>
+
+<div class="love-text">
+Only your heart can open mine 💖<br>
+Even after every fight...<br>
+I still choose you forever 🥺
+</div>
+
+<div class="unlock" onclick="showPass()">
+<span>💗</span>
+</div>
+
+<div class="pass-section" id="passSection">
+
+<input type="password" id="password" placeholder="Our love password 💌">
+
+<button onclick="unlockLove()">Open My Heart 💞</button>
+
+</div>
+
+</div>
+
+<script>
+
+/* load */
+window.addEventListener("load",()=>{
+document.body.classList.add("loaded");
+});
+
+/* transition */
+function goToPage(url){
+document.body.classList.add("fade-out");
+setTimeout(()=>location.href=url,500); /* 🔧 faster */
+}
+
+/* MUSIC */
+let music=document.getElementById("bgMusic");
+music.volume=0.15;
+
+/* restore */
+let saved=localStorage.getItem("musicTime");
+if(saved){
+music.currentTime=saved;
+}
+
+/* autoplay fix */
+window.addEventListener("load",()=>{
+music.play().catch(()=>{
+
+let startMusic = ()=>{
+music.play();
+document.removeEventListener("touchstart", startMusic);
+document.removeEventListener("click", startMusic);
+};
+
+document.addEventListener("touchstart", startMusic);
+document.addEventListener("click", startMusic);
+
+});
+});
+
+/* 🔧 reduce lag (500 → 1000) */
+setInterval(()=>{
+localStorage.setItem("musicTime",music.currentTime);
+},1000);
+
+const correctPassword="2011";
+
+function showPass(){
+document.getElementById("passSection").style.display="block";
+}
+
+function unlockLove(){
+let pass=document.getElementById("password").value;
+
+if(pass===correctPassword){
+goToPage("next.html");
+}
+else{
+let btn=document.querySelector("button");
+btn.classList.add("shake");
+setTimeout(()=>btn.classList.remove("shake"),400);
+}
+}
+
+</script>
+
+</body>
+</html>

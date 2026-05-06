@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Khushi 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background: radial-gradient(circle at top,#1a1a2e,#0f0f14);
+font-family:'Quicksand',sans-serif;
+overflow:hidden;
+opacity:0;
+transition:opacity 0.6s ease;
+}
+
+body.loaded{
+opacity:1;
+}
+
+/* card */
+.card{
+background: rgba(255,192,203,0.08);
+border:1px solid rgba(255,105,180,0.3);
+backdrop-filter: blur(5px);
+padding:30px;
+border-radius:25px;
+text-align:center;
+color:#fff;
+width:300px;
+box-shadow:0 0 15px rgba(255,105,180,0.2);
+}
+
+/* title */
+h1{
+font-family:'Great Vibes',cursive;
+font-size:30px;
+color:#ff85a2;
+}
+
+/* message */
+.msg{
+margin-top:10px;
+font-size:16px;
+color:#ffd1dc;
+}
+
+/* buttons */
+.btn{
+margin:10px;
+padding:10px 18px;
+border:none;
+border-radius:30px;
+cursor:pointer;
+font-size:14px;
+transition:0.25s;
+}
+
+.yes{
+background: linear-gradient(45deg,#ff4d88,#ff85a2);
+color:white;
+box-shadow:0 0 8px #ff4d88;
+}
+
+.no{
+background:transparent;
+color:#ff85a2;
+border:1px solid #ff85a2;
+}
+
+.yes:hover{transform:scale(1.08);}
+.no:hover{transform:scale(1.08);}
+
+/* result */
+#result{
+margin-top:12px;
+font-size:15px;
+color:#ffb6c1;
+}
+
+/* hearts */
+.heart{
+position:absolute;
+color:#ff6fa5;
+animation:float linear infinite;
+opacity:0.6;
+will-change: transform;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh);}
+100%{transform:translateY(-10vh);}
+}
+
+/* blast */
+.blast{
+position:absolute;
+font-size:22px;
+animation:blast 0.7s ease forwards;
+will-change: transform;
+}
+
+@keyframes blast{
+0%{transform:scale(0);opacity:1;}
+100%{transform:scale(2.5);opacity:0;}
+}
+
+/* FULL SCREEN */
+.fullscreen{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#000;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+opacity:0;
+pointer-events:none;
+transition:0.7s;
+}
+
+.fullscreen img{
+width:100%;
+height:100%;
+object-fit:cover;
+animation:zoom 5s ease forwards;
+filter:brightness(0.85);
+}
+
+@keyframes zoom{
+0%{transform:scale(1);}
+100%{transform:scale(1.06);}
+}
+
+/* overlay */
+.overlayText{
+position:absolute;
+color:#fff;
+font-size:26px;
+font-family:'Great Vibes',cursive;
+text-shadow:0 0 20px #ff4d88;
+}
+
+/* show */
+.show{
+opacity:1;
+pointer-events:auto;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+<h1>Khushi 💖</h1>
+
+<div class="msg">
+I love you 🥺💗
+</div>
+
+<button class="btn yes" onclick="loveYes()">I love you too 💕</button>
+<button class="btn no" onclick="loveNo()">I can't 😔</button>
+
+<div id="result"></div>
+</div>
+
+<!-- FULL SCREEN -->
+<div class="fullscreen" id="full">
+<img src="image.jpg">
+<div class="overlayText">My Love 💖</div>
+</div>
+
+<script>
+
+/* load */
+window.addEventListener("load",()=>{
+document.body.classList.add("loaded");
+});
+
+/* YES */
+function loveYes(){
+
+document.getElementById("result").innerHTML =
+"You made my heart so happy 🥺💖✨";
+
+/* optimized blast */
+for(let i=0;i<8;i++){
+let b=document.createElement("div");
+b.className="blast";
+b.innerHTML="💖";
+b.style.left=Math.random()*100+"vw";
+b.style.top=Math.random()*100+"vh";
+document.body.appendChild(b);
+setTimeout(()=>b.remove(),700);
+}
+
+/* smooth reveal */
+setTimeout(()=>{
+document.getElementById("card").style.display="none";
+document.getElementById("full").classList.add("show");
+},500);
+}
+
+/* NO */
+function loveNo(){
+document.getElementById("result").innerHTML =
+"It's okay… but my heart still chooses you 💔🥺💖";
+}
+
+/* hearts optimized */
+let heartCount = 0;
+const maxHearts = 8;
+
+function heart(){
+if(heartCount >= maxHearts) return;
+
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="💗";
+h.style.left=Math.random()*100+"vw";
+h.style.fontSize=(12+Math.random()*8)+"px";
+h.style.animationDuration=(4+Math.random()*2)+"s";
+
+document.body.appendChild(h);
+heartCount++;
+
+setTimeout(()=>{
+h.remove();
+heartCount--;
+},4000);
+}
+
+setInterval(heart,1300);
+
+</script>
+
+</body>
+</html>

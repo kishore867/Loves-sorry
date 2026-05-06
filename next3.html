@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love Question 💜</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+
+/* 💖 PAGE TRANSITION */
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#140b22,#2a1240,#4b1d67);
+font-family:'Poppins',sans-serif;
+overflow:hidden;
+
+opacity:0;
+transition:opacity 0.5s ease;
+}
+
+body.loaded{
+opacity:1;
+}
+
+body.fade-out{
+opacity:0;
+}
+
+/* glow */
+.glow1,.glow2{
+position:absolute;
+border-radius:50%;
+filter:blur(70px); /* 🔧 reduce lag */
+opacity:0.25;
+}
+
+.glow1{
+width:220px;
+height:220px;
+background:#a855f7;
+top:-80px;
+left:-80px;
+}
+
+.glow2{
+width:200px;
+height:200px;
+background:#ec4899;
+bottom:-80px;
+right:-80px;
+}
+
+/* card */
+.card{
+background:rgba(255,255,255,0.08);
+padding:35px;
+width:300px;
+border-radius:28px;
+text-align:center;
+color:white;
+backdrop-filter:blur(6px); /* 🔧 lighter */
+box-shadow:0 0 18px rgba(168,85,247,0.18);
+border:1px solid rgba(255,255,255,0.08);
+}
+
+/* title */
+h2{
+font-family:'Great Vibes',cursive;
+font-size:42px;
+margin-bottom:8px;
+color:#f5d0fe;
+text-shadow:0 0 10px rgba(236,72,153,0.5);
+}
+
+/* subtitle */
+.sub{
+font-size:15px;
+color:#d8b4fe;
+margin-bottom:20px;
+}
+
+/* buttons */
+button{
+padding:12px 24px;
+margin:8px;
+border:none;
+border-radius:25px;
+font-size:15px;
+cursor:pointer;
+transition:0.25s;
+}
+
+/* okay */
+.ok{
+background:linear-gradient(45deg,#9333ea,#c084fc);
+color:white;
+}
+
+/* no */
+.no{
+background:transparent;
+color:#f5d0fe;
+border:1px solid #c084fc;
+}
+
+button:hover{
+transform:scale(1.08);
+}
+
+/* hearts */
+.heart{
+position:absolute;
+color:#f9a8d4;
+animation:float linear forwards;
+opacity:0.6;
+will-change: transform; /* 🔧 smooth */
+}
+
+@keyframes float{
+0%{
+transform:translateY(100vh);
+opacity:0;
+}
+20%{
+opacity:0.6;
+}
+100%{
+transform:translateY(-10vh);
+opacity:0;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="glow1"></div>
+<div class="glow2"></div>
+
+<div class="card">
+<h2>Can you love me? 💜</h2>
+<div class="sub">my little heart chooses you always 🥺</div>
+
+<button class="ok" onclick="goOk()">Okay 💜</button>
+<button class="no" onclick="goNo()">No 😢</button>
+</div>
+
+<script>
+
+/* load */
+window.addEventListener("load",()=>{
+document.body.classList.add("loaded");
+});
+
+/* smooth navigation */
+function goToPage(url){
+document.body.classList.add("fade-out");
+setTimeout(()=>{
+window.location.href=url;
+},400); /* 🔧 fast */
+}
+
+function goOk(){
+goToPage("okay.html");
+}
+
+function goNo(){
+goToPage("sorry.html");
+}
+
+/* hearts optimized */
+let heartCount = 0;
+const maxHearts = 6; /* 🔧 reduce */
+
+function createHeart(){
+if(heartCount >= maxHearts) return;
+
+let h = document.createElement("div");
+h.className = "heart";
+h.innerHTML = "💜";
+h.style.left = Math.random()*100 + "vw";
+h.style.fontSize = (12 + Math.random()*8) + "px";
+h.style.animationDuration = (4 + Math.random()*2) + "s";
+
+document.body.appendChild(h);
+heartCount++;
+
+setTimeout(()=>{
+h.remove();
+heartCount--;
+},5000);
+}
+
+setInterval(createHeart,1500);
+
+</script>
+
+</body>
+</html>

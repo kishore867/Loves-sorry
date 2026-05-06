@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sorry Khushi 🥺</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+padding:20px;
+background:linear-gradient(135deg,#140b22,#2a1240,#4b1d67);
+color:white;
+font-family:'Poppins',sans-serif;
+overflow-y:auto;
+text-align:center;
+}
+
+/* title */
+h1{
+font-family:'Great Vibes',cursive;
+font-size:50px;
+margin-bottom:25px;
+color:#f5d0fe;
+text-shadow:0 0 15px rgba(236,72,153,0.6);
+}
+
+/* container */
+#container{
+display:flex;
+flex-direction:column;
+align-items:center;
+}
+
+/* message */
+.msg{
+margin:6px 0;
+font-size:16px;
+opacity:0;
+transform:translateY(10px);
+animation:fade 0.6s ease forwards; /* 🔧 faster */
+will-change: transform; /* 🔧 performance */
+}
+
+@keyframes fade{
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Sorry Khushi 🥺💔</h1>
+
+<div id="container"></div>
+
+<script>
+
+const container = document.getElementById("container");
+
+const fonts = ["Great Vibes","Dancing Script","Poppins"];
+
+/* 🔧 reduce load (1000 → 300 still looks long) */
+let total = 300;
+
+/* 🔧 smaller batch for smooth */
+let batch = 10;
+
+let count = 1;
+
+function addBatch(){
+
+let fragment = document.createDocumentFragment(); // 🔧 performance boost
+
+for(let i=0;i<batch && count<=total;i++,count++){
+
+let div = document.createElement("div");
+div.className="msg";
+
+div.innerHTML = `#${count} Sorry Khushi 🥺 - I love you 💜`;
+
+div.style.fontFamily = fonts[Math.floor(Math.random()*fonts.length)];
+div.style.fontSize = (14 + Math.random()*6) + "px"; /* 🔧 reduce size jump */
+div.style.color = `hsl(${280 + Math.random()*60},70%,80%)`;
+
+fragment.appendChild(div);
+}
+
+container.appendChild(fragment);
+
+/* 🔧 smooth rendering */
+if(count <= total){
+setTimeout(addBatch, 50); /* smoother than requestAnimationFrame */
+}
+}
+
+addBatch();
+
+</script>
+
+</body>
+</html>

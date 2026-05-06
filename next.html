@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I'm Sorry 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@700&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* 💖 PAGE TRANSITION */
+body{
+opacity:0;
+transition:opacity 0.5s ease; /* 🔧 faster */
+}
+
+body.loaded{
+opacity:1;
+}
+
+body.fade-out{
+opacity:0;
+}
+
+/* base */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+height:100vh;
+overflow:hidden;
+display:flex;
+justify-content:center;
+align-items:center;
+font-family:'Poppins',sans-serif;
+background:linear-gradient(135deg,#12071d,#24113d,#ff6fa9);
+position:relative;
+}
+
+/* glow */
+.blur1,.blur2{
+position:absolute;
+border-radius:50%;
+filter:blur(60px); /* 🔧 reduce lag */
+opacity:0.30;
+}
+
+.blur1{
+width:220px; /* 🔧 reduce */
+height:220px;
+background:#ff4fa3;
+top:-80px;
+left:-80px;
+}
+
+.blur2{
+width:220px;
+height:220px;
+background:#8e6cff;
+bottom:-70px;
+right:-70px;
+}
+
+/* card */
+.card{
+width:360px;
+padding:35px 28px;
+border-radius:35px;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(10px); /* 🔧 reduce */
+text-align:center;
+position:relative;
+}
+
+/* title */
+.title{
+font-family:'Great Vibes',cursive;
+font-size:60px;
+color:white;
+margin-bottom:15px;
+text-shadow:0 0 15px #ff4fa3;
+}
+
+/* typing */
+.typing{
+font-family:'Dancing Script',cursive;
+font-size:30px;
+color:#ffe5f1;
+margin-bottom:20px;
+min-height:50px;
+}
+
+/* heart */
+.big-heart{
+font-size:75px;
+margin-bottom:20px;
+}
+
+/* message */
+.message{
+font-size:16px;
+line-height:2.0;
+color:#fff3f8;
+margin-bottom:28px;
+font-family:'Dancing Script',cursive;
+
+text-shadow:
+0 0 8px rgba(255,255,255,0.4),
+0 0 15px rgba(255,105,180,0.4);
+
+animation:fadeIn 0.8s ease; /* 🔧 smoother */
+}
+
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:translateY(10px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* button */
+button{
+padding:15px 34px;
+border:none;
+border-radius:20px;
+background:linear-gradient(135deg,#ff5ea8,#ff9fc7);
+font-family:'Great Vibes',cursive;
+font-size:34px;
+color:white;
+cursor:pointer;
+box-shadow:0 0 15px rgba(255,105,180,0.25);
+}
+
+button:hover{
+transform:scale(1.04);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="blur1"></div>
+<div class="blur2"></div>
+
+<div class="card">
+
+<div class="title">I'm Sorry 💖</div>
+
+<div class="typing" id="typing"></div>
+
+<div class="big-heart">💗</div>
+
+<div class="message">
+I know we fought… and I hurt you 🥺
+I can’t stop thinking about it. It was completely my mistake, just my misunderstanding… and I’m really, really sorry. Please forgive me 🙏
+Trust me, hurting you was never my intention. Even the thought that I made you feel pain is breaking my heart right now.
+No matter how many fights happen between us, my heart never leaves you… it always runs back to you, every single time 💞
+You’re not just someone in my life… you are my happiness, my peace, my everything 🌸
+Please don’t stay angry with me for long… because every second without you feels heavy, and this little heart misses you more than I can explain 💌
+I just want us… nothing else. 💖
+</div>
+
+<button onclick="goNextPage()">
+Next Page 🥺
+</button>
+
+</div>
+
+<script>
+
+/* load */
+window.addEventListener("load",()=>{
+document.body.classList.add("loaded");
+});
+
+/* transition */
+function goToPage(url){
+document.body.classList.add("fade-out");
+setTimeout(()=>{
+window.location.href=url;
+},500); /* 🔧 faster */
+}
+
+/* typing optimized */
+const text = "I never stopped loving you... 💕";
+let i = 0;
+let speed = 50; /* 🔧 smoother typing */
+
+function typing(){
+if(i < text.length){
+document.getElementById("typing").innerHTML += text.charAt(i);
+i++;
+setTimeout(typing,speed);
+}
+}
+
+typing();
+
+/* next */
+function goNextPage(){
+goToPage("next2.html");
+}
+
+</script>
+
+</body>
+</html>

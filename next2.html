@@ -9,6 +9,18 @@
 
 <style>
 
+/* ⭐ GITHUB TEXT FIX */
+html{
+font-size:16px;
+-webkit-text-size-adjust:100%;
+-ms-text-size-adjust:100%;
+}
+
+body{
+font-size:16px;
+line-height:1.5;
+}
+
 /* 💖 PAGE TRANSITION */
 body{
 opacity:0;
@@ -39,6 +51,27 @@ overflow:hidden;
 background:linear-gradient(135deg,#1a0b2e,#3b185f,#ff6fa9);
 font-family:'Poppins',sans-serif;
 position:relative;
+}
+
+/* ⭐ GO BACK BUTTON */
+.back-btn{
+position:fixed;
+top:15px;
+left:15px;
+z-index:999;
+padding:10px 16px;
+border-radius:18px;
+text-decoration:none;
+font-weight:600;
+color:white;
+background:linear-gradient(135deg,#ff4fa3,#8e6cff);
+box-shadow:0 4px 12px rgba(0,0,0,0.3);
+font-family:'Poppins',sans-serif;
+transition:0.3s;
+}
+
+.back-btn:hover{
+transform:scale(1.08);
 }
 
 /* glow */
@@ -148,10 +181,26 @@ will-change: transform;
 100%{transform:translateY(-110vh);opacity:0;}
 }
 
+/* ⭐ MOBILE FIX */
+@media (max-width:600px){
+.title{
+font-size:38px;
+}
+.subtitle{
+font-size:20px;
+}
+.card{
+padding:25px 18px;
+}
+}
+
 </style>
 </head>
 
 <body>
+
+<!-- ⭐ GO BACK BUTTON -->
+<a class="back-btn" href="javascript:history.back()">💖 Go Back</a>
 
 <audio id="bgMusic" loop>
 <source src="music.mp3" type="audio/mp3">
@@ -180,12 +229,10 @@ Please forgive me... I really miss you 🥺💞
 
 <script>
 
-/* load */
 window.addEventListener("load",()=>{
 document.body.classList.add("loaded");
 });
 
-/* transition */
 function goToPage(url){
 document.body.classList.add("fade-out");
 setTimeout(()=>{
@@ -193,7 +240,6 @@ window.location.href=url;
 },500);
 }
 
-/* MUSIC */
 let music=document.getElementById("bgMusic");
 music.volume=0.15;
 
@@ -208,25 +254,18 @@ localStorage.setItem("musicTime",music.currentTime);
 
 window.addEventListener("click",()=>music.play(),{once:true});
 
-/* next */
 function goNext(){
 goToPage("next3.html");
 }
 
-/* NO BUTTON FIX (🔥 MAIN FIX) */
 const noBtn=document.getElementById("noBtn");
 const card=document.querySelector(".card");
 
-/* desktop */
 noBtn.addEventListener("mouseenter",moveBtn);
-
-/* mobile touch */
 noBtn.addEventListener("touchstart",(e)=>{
-e.preventDefault();   // ❌ stop click
-moveBtn();            // ✅ move button
+e.preventDefault();
+moveBtn();
 });
-
-/* ALSO block normal click */
 noBtn.addEventListener("click",(e)=>{
 e.preventDefault();
 moveBtn();
@@ -245,7 +284,6 @@ noBtn.style.left=x+"px";
 noBtn.style.top=y+"px";
 }
 
-/* hearts */
 for(let i=0;i<8;i++){
 let h=document.createElement("div");
 h.className="heart";

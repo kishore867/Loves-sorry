@@ -9,6 +9,18 @@
 
 <style>
 
+/* ⭐ GITHUB TEXT FIX */
+html{
+font-size:16px;
+-webkit-text-size-adjust:100%;
+-ms-text-size-adjust:100%;
+}
+
+body{
+font-size:16px;
+line-height:1.5;
+}
+
 /* 💖 PAGE TRANSITION */
 body{
 margin:0;
@@ -32,11 +44,32 @@ body.fade-out{
 opacity:0;
 }
 
+/* ⭐ GO BACK BUTTON */
+.back-btn{
+position:fixed;
+top:15px;
+left:15px;
+z-index:999;
+padding:10px 16px;
+border-radius:18px;
+text-decoration:none;
+font-weight:600;
+color:white;
+background:linear-gradient(135deg,#ff4fa3,#8e6cff);
+box-shadow:0 4px 12px rgba(0,0,0,0.3);
+font-family:'Poppins',sans-serif;
+transition:0.3s;
+}
+
+.back-btn:hover{
+transform:scale(1.08);
+}
+
 /* glow */
 .glow1,.glow2{
 position:absolute;
 border-radius:50%;
-filter:blur(70px); /* 🔧 reduce lag */
+filter:blur(70px);
 opacity:0.25;
 }
 
@@ -64,7 +97,7 @@ width:300px;
 border-radius:28px;
 text-align:center;
 color:white;
-backdrop-filter:blur(6px); /* 🔧 lighter */
+backdrop-filter:blur(6px);
 box-shadow:0 0 18px rgba(168,85,247,0.18);
 border:1px solid rgba(255,255,255,0.08);
 }
@@ -119,7 +152,7 @@ position:absolute;
 color:#f9a8d4;
 animation:float linear forwards;
 opacity:0.6;
-will-change: transform; /* 🔧 smooth */
+will-change: transform;
 }
 
 @keyframes float{
@@ -136,10 +169,27 @@ opacity:0;
 }
 }
 
+/* ⭐ MOBILE FIX */
+@media (max-width:600px){
+.card{
+width:90%;
+padding:25px 18px;
+}
+h2{
+font-size:34px;
+}
+.sub{
+font-size:13px;
+}
+}
+
 </style>
 </head>
 
 <body>
+
+<!-- ⭐ GO BACK BUTTON -->
+<a class="back-btn" href="javascript:history.back()">💖 Go Back</a>
 
 <div class="glow1"></div>
 <div class="glow2"></div>
@@ -154,17 +204,15 @@ opacity:0;
 
 <script>
 
-/* load */
 window.addEventListener("load",()=>{
 document.body.classList.add("loaded");
 });
 
-/* smooth navigation */
 function goToPage(url){
 document.body.classList.add("fade-out");
 setTimeout(()=>{
 window.location.href=url;
-},400); /* 🔧 fast */
+},400);
 }
 
 function goOk(){
@@ -175,9 +223,9 @@ function goNo(){
 goToPage("sorry.html");
 }
 
-/* hearts optimized */
+/* hearts */
 let heartCount = 0;
-const maxHearts = 6; /* 🔧 reduce */
+const maxHearts = 6;
 
 function createHeart(){
 if(heartCount >= maxHearts) return;

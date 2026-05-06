@@ -2,12 +2,25 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sorry Khushi 🥺</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
 
 <style>
 
+/* ⭐ GITHUB TEXT FIX */
+html{
+font-size:16px;
+-webkit-text-size-adjust:100%;
+-ms-text-size-adjust:100%;
+}
+
+body{
+font-size:16px;
+}
+
+/* base */
 body{
 margin:0;
 padding:20px;
@@ -16,6 +29,27 @@ color:white;
 font-family:'Poppins',sans-serif;
 overflow-y:auto;
 text-align:center;
+}
+
+/* ⭐ GO BACK BUTTON */
+.back-btn{
+position:fixed;
+top:15px;
+left:15px;
+z-index:999;
+padding:10px 16px;
+border-radius:18px;
+text-decoration:none;
+font-weight:600;
+color:white;
+background:linear-gradient(135deg,#ff4fa3,#8e6cff);
+box-shadow:0 4px 12px rgba(0,0,0,0.3);
+font-family:'Poppins',sans-serif;
+transition:0.3s;
+}
+
+.back-btn:hover{
+transform:scale(1.08);
 }
 
 /* title */
@@ -40,8 +74,8 @@ margin:6px 0;
 font-size:16px;
 opacity:0;
 transform:translateY(10px);
-animation:fade 0.6s ease forwards; /* 🔧 faster */
-will-change: transform; /* 🔧 performance */
+animation:fade 0.6s ease forwards;
+will-change: transform;
 }
 
 @keyframes fade{
@@ -51,10 +85,26 @@ transform:translateY(0);
 }
 }
 
+/* ⭐ MOBILE FIX */
+@media (max-width:600px){
+h1{
+font-size:38px;
+}
+.msg{
+font-size:14px;
+}
+body{
+padding:15px;
+}
+}
+
 </style>
 </head>
 
 <body>
+
+<!-- ⭐ GO BACK BUTTON -->
+<a class="back-btn" href="javascript:history.back()">💖 Go Back</a>
 
 <h1>Sorry Khushi 🥺💔</h1>
 
@@ -66,17 +116,13 @@ const container = document.getElementById("container");
 
 const fonts = ["Great Vibes","Dancing Script","Poppins"];
 
-/* 🔧 reduce load (1000 → 300 still looks long) */
 let total = 300;
-
-/* 🔧 smaller batch for smooth */
 let batch = 10;
-
 let count = 1;
 
 function addBatch(){
 
-let fragment = document.createDocumentFragment(); // 🔧 performance boost
+let fragment = document.createDocumentFragment();
 
 for(let i=0;i<batch && count<=total;i++,count++){
 
@@ -86,7 +132,7 @@ div.className="msg";
 div.innerHTML = `#${count} Sorry Khushi 🥺 - I love you 💜`;
 
 div.style.fontFamily = fonts[Math.floor(Math.random()*fonts.length)];
-div.style.fontSize = (14 + Math.random()*6) + "px"; /* 🔧 reduce size jump */
+div.style.fontSize = (14 + Math.random()*6) + "px";
 div.style.color = `hsl(${280 + Math.random()*60},70%,80%)`;
 
 fragment.appendChild(div);
@@ -94,9 +140,8 @@ fragment.appendChild(div);
 
 container.appendChild(fragment);
 
-/* 🔧 smooth rendering */
 if(count <= total){
-setTimeout(addBatch, 50); /* smoother than requestAnimationFrame */
+setTimeout(addBatch, 50);
 }
 }
 

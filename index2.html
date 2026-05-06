@@ -9,6 +9,18 @@
 
 <style>
 
+/* ⭐ GITHUB TEXT SIZE FIX */
+html{
+font-size:16px;
+-webkit-text-size-adjust:100%;
+-ms-text-size-adjust:100%;
+}
+
+body{
+font-size:16px;
+line-height:1.5;
+}
+
 /* 💖 PAGE TRANSITION */
 body{
 opacity:0;
@@ -29,14 +41,6 @@ transform:scale(0.96);
 filter:blur(8px);
 }
 
-body.loaded{
-opacity:1;
-}
-
-body.fade-out{
-opacity:0;
-}
-
 /* ===== BASE ===== */
 *{
 margin:0;
@@ -55,16 +59,37 @@ background:linear-gradient(135deg,#0d0618,#1b1030,#ff73ae);
 position:relative;
 }
 
+/* ⭐ GO BACK BUTTON */
+.back-btn{
+position:fixed;
+top:15px;
+left:15px;
+z-index:999;
+padding:10px 16px;
+border-radius:18px;
+text-decoration:none;
+font-weight:600;
+color:white;
+background:linear-gradient(135deg,#ff4fa3,#8e6cff);
+box-shadow:0 4px 12px rgba(0,0,0,0.3);
+font-family:'Poppins',sans-serif;
+transition:0.3s;
+}
+
+.back-btn:hover{
+transform:scale(1.08);
+}
+
 /* glow */
 .blur1,.blur2{
 position:absolute;
 border-radius:50%;
-filter:blur(60px); /* 🔧 reduce lag */
+filter:blur(60px);
 opacity:0.30;
 }
 
 .blur1{
-width:200px; /* 🔧 reduce */
+width:200px;
 height:200px;
 background:#ff4fa3;
 top:-70px;
@@ -85,7 +110,7 @@ width:340px;
 padding:35px 26px;
 border-radius:32px;
 background:rgba(255,255,255,0.08);
-backdrop-filter:blur(10px); /* 🔧 reduce heavy blur */
+backdrop-filter:blur(10px);
 border:1px solid rgba(255,255,255,0.12);
 text-align:center;
 position:relative;
@@ -129,7 +154,7 @@ font-size:62px;
 
 @keyframes heartbeat{
 0%{transform:scale(1);}
-14%{transform:scale(1.05);} /* 🔧 smoother */
+14%{transform:scale(1.05);}
 28%{transform:scale(1);}
 }
 
@@ -190,10 +215,27 @@ animation:shake 0.4s;
 100%{transform:translateX(0);}
 }
 
+/* ⭐ MOBILE FIX */
+@media (max-width:600px){
+.card{
+width:90%;
+padding:25px 18px;
+}
+.title{
+font-size:40px;
+}
+.love-text{
+font-size:22px;
+}
+}
+
 </style>
 </head>
 
 <body>
+
+<!-- ⭐ GO BACK BUTTON -->
+<a class="back-btn" href="javascript:history.back()">💖 Go Back</a>
 
 <audio id="bgMusic" loop>
 <source src="music.mp3" type="audio/mp3">
@@ -228,28 +270,24 @@ I still choose you forever 🥺
 
 <script>
 
-/* load */
 window.addEventListener("load",()=>{
 document.body.classList.add("loaded");
 });
 
-/* transition */
 function goToPage(url){
 document.body.classList.add("fade-out");
-setTimeout(()=>location.href=url,500); /* 🔧 faster */
+setTimeout(()=>location.href=url,500);
 }
 
 /* MUSIC */
 let music=document.getElementById("bgMusic");
 music.volume=0.15;
 
-/* restore */
 let saved=localStorage.getItem("musicTime");
 if(saved){
 music.currentTime=saved;
 }
 
-/* autoplay fix */
 window.addEventListener("load",()=>{
 music.play().catch(()=>{
 
@@ -265,7 +303,6 @@ document.addEventListener("click", startMusic);
 });
 });
 
-/* 🔧 reduce lag (500 → 1000) */
 setInterval(()=>{
 localStorage.setItem("musicTime",music.currentTime);
 },1000);

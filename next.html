@@ -9,10 +9,22 @@
 
 <style>
 
+/* ⭐ GITHUB TEXT FIX */
+html{
+font-size:16px;
+-webkit-text-size-adjust:100%;
+-ms-text-size-adjust:100%;
+}
+
+body{
+font-size:16px;
+line-height:1.5;
+}
+
 /* 💖 PAGE TRANSITION */
 body{
 opacity:0;
-transition:opacity 0.5s ease; /* 🔧 faster */
+transition:opacity 0.5s ease;
 }
 
 body.loaded{
@@ -41,16 +53,37 @@ background:linear-gradient(135deg,#12071d,#24113d,#ff6fa9);
 position:relative;
 }
 
+/* ⭐ GO BACK BUTTON */
+.back-btn{
+position:fixed;
+top:15px;
+left:15px;
+z-index:999;
+padding:10px 16px;
+border-radius:18px;
+text-decoration:none;
+font-weight:600;
+color:white;
+background:linear-gradient(135deg,#ff4fa3,#8e6cff);
+box-shadow:0 4px 12px rgba(0,0,0,0.3);
+font-family:'Poppins',sans-serif;
+transition:0.3s;
+}
+
+.back-btn:hover{
+transform:scale(1.08);
+}
+
 /* glow */
 .blur1,.blur2{
 position:absolute;
 border-radius:50%;
-filter:blur(60px); /* 🔧 reduce lag */
+filter:blur(60px);
 opacity:0.30;
 }
 
 .blur1{
-width:220px; /* 🔧 reduce */
+width:220px;
 height:220px;
 background:#ff4fa3;
 top:-80px;
@@ -71,7 +104,7 @@ width:360px;
 padding:35px 28px;
 border-radius:35px;
 background:rgba(255,255,255,0.08);
-backdrop-filter:blur(10px); /* 🔧 reduce */
+backdrop-filter:blur(10px);
 text-align:center;
 position:relative;
 }
@@ -112,7 +145,7 @@ text-shadow:
 0 0 8px rgba(255,255,255,0.4),
 0 0 15px rgba(255,105,180,0.4);
 
-animation:fadeIn 0.8s ease; /* 🔧 smoother */
+animation:fadeIn 0.8s ease;
 }
 
 @keyframes fadeIn{
@@ -143,10 +176,30 @@ button:hover{
 transform:scale(1.04);
 }
 
+/* ⭐ MOBILE FIX */
+@media (max-width:600px){
+.card{
+width:90%;
+padding:25px 18px;
+}
+.title{
+font-size:45px;
+}
+.typing{
+font-size:24px;
+}
+.message{
+font-size:14px;
+}
+}
+
 </style>
 </head>
 
 <body>
+
+<!-- ⭐ GO BACK BUTTON -->
+<a class="back-btn" href="javascript:history.back()">💖 Go Back</a>
 
 <div class="blur1"></div>
 <div class="blur2"></div>
@@ -177,23 +230,21 @@ Next Page 🥺
 
 <script>
 
-/* load */
 window.addEventListener("load",()=>{
 document.body.classList.add("loaded");
 });
 
-/* transition */
 function goToPage(url){
 document.body.classList.add("fade-out");
 setTimeout(()=>{
 window.location.href=url;
-},500); /* 🔧 faster */
+},500);
 }
 
-/* typing optimized */
+/* typing */
 const text = "I never stopped loving you... 💕";
 let i = 0;
-let speed = 50; /* 🔧 smoother typing */
+let speed = 50;
 
 function typing(){
 if(i < text.length){
@@ -205,7 +256,6 @@ setTimeout(typing,speed);
 
 typing();
 
-/* next */
 function goNextPage(){
 goToPage("next2.html");
 }
